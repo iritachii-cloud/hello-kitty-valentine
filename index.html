@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Kitty Valentine Adventure 🐱💖</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Dancing+Script:wght@400;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐱</text></svg>">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+    </style>
+</head>
+<body>
+    <!-- Cat Cursor -->
+    <div id="cat-cursor"></div>
+    
+    <!-- Main Game Container -->
+    <div id="game-container">
+        <!-- Loading Screen -->
+        <section id="loading-screen" class="game-scene active">
+            <div class="scene-background">
+                <div class="floating-characters">
+                    <!-- Hello Kitty -->
+                    <div class="character left-character">
+                        <div class="character-image-container">
+                            <img src="assets/images/characters/hello-kitty.png" alt="Hello Kitty" class="character-image" id="character1-img">
+                        </div>
+                        <div class="character-placeholder" id="character1-placeholder">
+                            <div class="kitty-ears left-ear"></div>
+                            <div class="kitty-ears right-ear"></div>
+                            <div class="kitty-face">
+                                <div class="kitty-eyes left-eye"></div>
+                                <div class="kitty-eyes right-eye"></div>
+                                <div class="kitty-nose"></div>
+                                <div class="kitty-whiskers left-whiskers"></div>
+                                <div class="kitty-whiskers right-whiskers"></div>
+                            </div>
+                            <div class="kitty-bow"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- My Melody -->
+                    <div class="character right-character">
+                        <div class="character-image-container">
+                            <img src="assets/images/characters/my-melody.png" alt="My Melody" class="character-image" id="character2-img">
+                        </div>
+                        <div class="character-placeholder" id="character2-placeholder">
+                            <div class="melody-hood"></div>
+                            <div class="melody-face">
+                                <div class="melody-eyes left-eye"></div>
+                                <div class="melody-eyes right-eye"></div>
+                                <div class="melody-mouth"></div>
+                            </div>
+                            <div class="melody-flower"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="loading-content">
+                    <div class="loading-header">
+                        <h1 class="game-title">🐱 Hello Kitty Valentine Adventure 💖</h1>
+                        <p class="game-subtitle">Loading cuteness overload... 🎀✨</p>
+                    </div>
+
+                    <div class="loading-progress">
+                        <div class="heart-progress-container">
+                            <div class="heart-progress-bar">
+                                <div class="heart-progress-fill" id="progress-fill"></div>
+                            </div>
+                            <div class="heart-progress-text">
+                                Purring... <span id="progress-percent">0</span>%
+                            </div>
+                        </div>
+
+                        <div class="loading-quote-container">
+                            <p id="loading-quote" class="loading-quote">Baking heart-shaped cookies... 🍪💖</p>
+                        </div>
+
+                        <!-- Skip Button -->
+                        <button id="skip-loading" class="skip-button" style="display: none;">
+                            <i class="fas fa-paw"></i>
+                            <span>Skip to Cuteness</span>
+                        </button>
+                    </div>
+
+                    <div class="cat-facts">
+                        <p><i class="fas fa-paw"></i> Did you know? Cats purr at the same frequency as an idling diesel engine!</p>
+                    </div>
+                </div>
+
+                <div class="cat-particles-container" id="particles-container"></div>
+            </div>
+        </section>
+
+        <!-- Name Input Screen -->
+        <section id="name-screen" class="game-scene">
+            <div class="scene-background">
+                <div class="scene-content">
+                    <div class="name-container">
+                        <div class="name-header">
+                            <h2><i class="fas fa-cat"></i> Before we begin, pretty human...</h2>
+                            <p class="name-prompt">What should I call the most beautiful person in the whole wide world? 🐾✨</p>
+                        </div>
+
+                        <div class="name-input-container">
+                            <div class="input-decoration">
+                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-cat"></i>
+                            </div>
+                            <input type="text" id="user-name" placeholder="Type your beautiful name here..." maxlength="20" autocomplete="off">
+                            <div class="input-paws">
+                                <i class="fas fa-paw"></i>
+                                <i class="fas fa-paw"></i>
+                                <i class="fas fa-paw"></i>
+                            </div>
+                            <button id="submit-name" class="btn-meow">
+                                <i class="fas fa-heart"></i>
+                                <span>Continue this adventure!</span>
+                            </button>
+                        </div>
+                        
+                        <div class="kitty-tip">
+                            <i class="fas fa-lightbulb"></i> 
+                            <p>Pro tip: Say your name out loud so the kitties can learn it! 🐱📝</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Disclaimer Screen -->
+        <section id="disclaimer-screen" class="game-scene">
+            <div class="scene-background">
+                <div class="scene-content">
+                    <div class="disclaimer-container">
+                        <div class="warning-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h2>⚠️ Cuteness Warning! ⚠️</h2>
+                        <div class="disclaimer-text">
+                            <p>This journey contains extreme levels of:</p>
+                            <ul>
+                                <li><i class="fas fa-cat"></i> Adorable kitty memes</li>
+                                <li><i class="fas fa-heart"></i> Heart-melting compliments</li>
+                                <li><i class="fas fa-laugh-squint"></i> Purr-fectly hilarious moments</li>
+                                <li><i class="fas fa-magic"></i> Magical hello kitty sparkles</li>
+                                <li><i class="fas fa-kiss-wink-heart"></i> Uncontrollable blushing</li>
+                                <li><i class="fas fa-cookie-bite"></i> Virtual cat treats</li>
+                                <li><i class="fas fa-grin-stars"></i> Extreme fangirling</li>
+                                <li><i class="fas fa-cloud"></i> Fluffy cloud of love</li>
+                            </ul>
+                            <p class="final-warning">Proceed only if your heart is ready for maximum cuteness overload. Meow! 😻</p>
+                        </div>
+                        <button id="accept-disclaimer" class="btn-purr">
+                            <i class="fas fa-paw"></i>
+                            <span>I Accept the Cuteness!</span>
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Questions Screen -->
+        <section id="questions-screen" class="game-scene">
+            <div class="scene-background">
+                <div class="scene-content">
+                    <div class="questions-container">
+                        <div class="questions-header">
+                            <div class="question-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="question-progress"></div>
+                                </div>
+                                <span class="question-count">
+                                    <span id="current-question">1</span>/<span id="total-questions">10</span>
+                                    <i class="fas fa-paw"></i>
+                                </span>
+                            </div>
+                            <h2 id="question-category">Getting to Know Your Purr-sonality 🐱</h2>
+                        </div>
+
+                        <div class="question-content">
+                            <div class="question-card">
+                                <div class="question-header">
+                                    <div class="cat-emoji">😻</div>
+                                    <h3 id="main-question"></h3>
+                                </div>
+                                
+                                <div class="question-image-container">
+                                    <div class="question-image-placeholder" id="question-image"></div>
+                                </div>
+
+                                <div class="options-container" id="options-container">
+                                    <!-- Options will be dynamically inserted here -->
+                                </div>
+
+                                <div class="question-actions">
+                                    <button id="next-question" class="btn-next" disabled>
+                                        <span>Next Meow-stion</span>
+                                        <i class="fas fa-paw"></i>
+                                    </button>
+                                </div>
+
+                                <div class="reaction-container">
+                                    <div class="cat-reaction" id="cat-reaction">
+                                        <div class="cat-bubble">
+                                            <p id="option-reaction" class="reaction-text"></p>
+                                        </div>
+                                        <div class="cat-avatar">🐱</div>
+                                    </div>
+                                    <div class="emoji-reactions" id="emoji-reactions"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="question-footer">
+                            <p id="flirty-quote" class="flirty-quote"></p>
+                            <div class="cat-walking" id="cat-walking">
+                                <div class="paw-print"></div>
+                                <div class="paw-print"></div>
+                                <div class="paw-print"></div>
+                                <div class="paw-print"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Screen -->
+        <section id="results-screen" class="game-scene">
+            <div class="scene-background">
+                <div class="scene-content">
+                    <div class="results-container">
+                        <div class="results-header">
+                            <h2><i class="fas fa-envelope"></i> Your Purr-sonal Love Letters 💌🐾</h2>
+                            <p class="results-subtitle">Specially crafted for the amazing <span id="user-name-display"></span> ✨</p>
+                            <div class="kitty-stamp">
+                                <i class="fas fa-paw"></i>
+                                <span>Approved by Hello Kitty</span>
+                                <i class="fas fa-paw"></i>
+                            </div>
+                        </div>
+
+                        <div class="letters-container" id="letters-container">
+                            <!-- Letters will be dynamically inserted here -->
+                        </div>
+
+                        <div class="letter-instruction">
+                            <i class="fas fa-hand-point-up"></i>
+                            <p>Choose one that makes your heart go "meow!" 🐱💖</p>
+                            <div class="blinking-cat">😻</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proposal Screen -->
+        <section id="proposal-screen" class="game-scene">
+            <div class="scene-background">
+                <div class="scene-content">
+                    <div class="proposal-container">
+                        <div class="proposal-question">
+                            <div class="kitty-hearts">
+                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h2>Will you be my Valentine? 🐱💖</h2>
+                            <p class="proposal-subtitle">Choose wisely, my lovely <span id="proposal-name"></span>...</p>
+                            <div class="proposal-note">
+                                <i class="fas fa-sticky-note"></i>
+                                <p>P.S. Saying yes comes with unlimited virtual cuddles! 🥰</p>
+                            </div>
+                        </div>
+
+                        <div class="proposal-buttons">
+                            <button id="yes-button" class="btn-heartbeat">
+                                <i class="fas fa-heart"></i>
+                                <span>YES! Absolutely! 😻</span>
+                                <i class="fas fa-star"></i>
+                            </button>
+                            <button id="no-button" class="btn-villain" style="color: black;">
+                                <i class="fas fa-cat"></i>
+                                <span>Maybe later? 🙀</span>
+                                <i class="fas fa-question"></i>
+                            </button>
+                        </div>
+
+                        <div class="proposal-effects" id="proposal-effects"></div>
+                        
+                        <div class="cat-encouragement">
+                            <div class="encouragement-bubble">
+                                <p>Say yes! I have treats! 🍬</p>
+                                <div class="bubble-tail"></div>
+                            </div>
+                            <div class="kitty-encourager">🐱</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Memory Vault Screen -->
+        <section id="vault-screen" class="game-scene">
+            <div class="scene-background">
+                <div class="scene-content">
+                    <div class="vault-container">
+                        <div class="vault-header">
+                            <h2><i class="fas fa-treasure-chest"></i> Kitty Memory Vault 🐾🎀</h2>
+                            <p>Unlock all memories for your final purr-ize!</p>
+                            <div class="vault-progress">
+                                <span id="unlocked-count">0</span>/4 Memories Unlocked
+                                <div class="progress-cats">
+                                    <i class="fas fa-cat"></i>
+                                    <i class="fas fa-cat"></i>
+                                    <i class="fas fa-cat"></i>
+                                    <i class="fas fa-cat"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="vault-content-wrapper">
+                            <div class="vault-icons" id="vault-icons">
+                                <!-- Vault icons will be dynamically inserted here -->
+                            </div>
+
+                            <div class="vault-content" id="vault-content">
+                                <div class="vault-placeholder">
+                                    <div class="sleeping-cat">
+                                        <i class="fas fa-cat"></i>
+                                        <div class="zzz">Zzz...</div>
+                                    </div>
+                                    <p>Select a memory box to unlock the cuteness! 🐱💤</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="vault-hint">
+                            <i class="fas fa-lightbulb"></i>
+                            <p>Hint: Each box contains something special about your journey! ✨</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Scene -->
+        <section id="final-screen" class="game-scene">
+            <div class="scene-background">
+                <div class="scene-content">
+                    <div class="final-container">
+                        <div class="final-envelope">
+                            <div class="envelope-flap"></div>
+                            <div class="final-letter" id="final-letter">
+                                <!-- Final letter will be dynamically inserted here -->
+                            </div>
+                        </div>
+
+                        <div class="final-kitties">
+                            <div class="dancing-kitty">💃🐱🕺</div>
+                            <div class="confetti-kitties">
+                                <i class="fas fa-cat"></i>
+                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-cat"></i>
+                                <i class="fas fa-heart"></i>
+                            </div>
+                        </div>
+
+                        <div class="final-actions">
+                            <button id="relive-button" class="btn-glow">
+                                <i class="fas fa-redo"></i>
+                                <span>Relive the Magic! ✨</span>
+                            </button>
+                            <button id="share-button" class="btn-pulse">
+                                <i class="fas fa-share-alt"></i>
+                                <span>Share the Cuteness! 🐱</span>
+                            </button>
+                            <button id="treat-button" class="btn-meow">
+                                <i class="fas fa-cookie-bite"></i>
+                                <span>Virtual Treat! 🍪</span>
+                            </button>
+                        </div>
+                        
+                        <div class="final-signature">
+                            <p>Made with <i class="fas fa-heart"></i> and <i class="fas fa-paw"></i> prints for the most amazing person</p>
+                            <div class="paw-prints">
+                                <i class="fas fa-paw"></i>
+                                <i class="fas fa-paw"></i>
+                                <i class="fas fa-paw"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Background Music -->
+    <audio id="background-music" loop>
+        <source src="assets/music/mymusic1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Cat Sounds -->
+    <audio id="meow-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-cat-meow-117.mp3"></audio>
+    <audio id="purr-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-cat-purring-119.mp3"></audio>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
