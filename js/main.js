@@ -24,7 +24,7 @@ class HelloKittyGame {
             "You monster! 😾",
             "Okay, I'll use my sad eyes... 🥺",
             "Please reconsider? 🙏",
-            "I'm just a cute kitty! 🐱",
+            "I'm just a cute kitty! 😼",
             "This is emotionally damaging!",
             "Fine, I'll ask my friend...",
             "OKAY FINE! YES IT IS! 😻"
@@ -84,7 +84,7 @@ class HelloKittyGame {
         try {
             const response = await fetch('data/data.json');
             this.gameData = await response.json();
-            console.log('🐱 Game data loaded successfully!');
+            console.log('😼 Game data loaded successfully!');
         } catch (error) {
             console.error('😿 Error loading game data:', error);
             this.gameData = this.getFallbackData();
@@ -136,7 +136,7 @@ class HelloKittyGame {
 
         // Disclaimer acceptance
         document.getElementById('accept-disclaimer').addEventListener('click', () => {
-            this.playSFX('click');
+            this.playSFX('muhehehe');
             setTimeout(() => this.showQuestions(), 300);
         });
 
@@ -154,6 +154,7 @@ class HelloKittyGame {
         document.getElementById('next-question').addEventListener('click', () => {
             if (document.getElementById('next-question').disabled) return;
             this.playSFX('transition');
+            this.playSFX('meow');
             this.goToNextQuestion();
         });
 
@@ -211,6 +212,7 @@ class HelloKittyGame {
         // Cat sounds
         this.meowSound = document.getElementById('meow-sound');
         this.purrSound = document.getElementById('purr-sound');
+        this.muheheheSound = document.getElementById('muhehehe-sound');
 
         // Play BGM helper
         this.playBGM = () => {
@@ -292,6 +294,18 @@ class HelloKittyGame {
                         frequency = 300;
                         typeValue = 'sawtooth';
                         break;
+                    case 'muhehehe':
+                        // Play actual meow sound if available
+                        if (this.muheheheSound) {
+                            this.muheheheSound.currentTime = 0;
+                            this.muheheheSound.play();
+                            return;
+                        }
+                        // Fallback to synthesized meow
+                        frequency = 300;
+                        typeValue = 'sawtooth';
+                        break;
+
                     case 'purr':
                         // Play actual purr sound if available
                         if (this.purrSound) {
@@ -440,7 +454,7 @@ class HelloKittyGame {
         // Clear existing particles
         container.innerHTML = '';
 
-        const emojis = ['🐱', '🐾', '💖', '🎀', '✨', '🌟', '😻', '🐈', '🧶'];
+        const emojis = ['😼', '🐾', '💖', '🎀', '✨', '🌟', '😻', '🐈', '🧶'];
 
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
@@ -521,7 +535,7 @@ class HelloKittyGame {
         // Update quote to show skipping
         quoteElement.style.animation = 'none';
         setTimeout(() => {
-            quoteElement.textContent = "Skipping to the cuteness! 🐱💨";
+            quoteElement.textContent = "Skipping to the cuteness! 😼💨";
             quoteElement.style.animation = 'fadeInOut 1s ease-in-out';
         }, 50);
 
@@ -572,7 +586,7 @@ class HelloKittyGame {
             // Add shake animation to input
             this.playSFX('error');
             nameInput.classList.add('shake');
-            nameInput.placeholder = "Please enter your cute name! 🐱";
+            nameInput.placeholder = "Please enter your cute name! 😼";
             setTimeout(() => {
                 nameInput.classList.remove('shake');
                 nameInput.placeholder = "Type your beautiful name here...";
@@ -602,7 +616,7 @@ class HelloKittyGame {
 
         // Set question image emoji
         const questionImage = document.getElementById('question-image');
-        questionImage.innerHTML = question.imageEmoji || '🐱';
+        questionImage.innerHTML = question.imageEmoji || '😼';
 
         document.getElementById('question-category').textContent = question.category;
 
@@ -774,7 +788,7 @@ class HelloKittyGame {
             teasing: `Oh ${this.userName}, you really thought you could resist my cuteness? 😼`,
             emotional: `${this.userName}, there's something I've been wanting to tell you with all my heart... 💝`,
             fantasy: `In a world of magic and sparkles, I found you, ${this.userName}... ✨`,
-            kitty: `${this.userName}, you're the cat's pajamas! The bee's knees! The purr-fect human! 🐱👑`
+            kitty: `${this.userName}, you're the cat's pajamas! The bee's knees! The purr-fect human! 😼👑`
         };
 
         return previews[type] || `For my favorite human, ${this.userName}... 🐾`;
@@ -863,7 +877,7 @@ class HelloKittyGame {
 
     handleYesClick() {
         this.playSFX('heart');
-        this.playSFX('purr');
+        this.playSFX('muhehehe');
 
         const yesButton = document.getElementById('yes-button');
         const noButton = document.getElementById('no-button');
@@ -918,7 +932,7 @@ class HelloKittyGame {
             ${this.userName}, you just made a kitty very happy!<br>
             Time to unlock some memories! 🗝️✨
         </p>
-        <div style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 1rem;">🐱💖🎀</div>
+        <div style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 1rem;">😼💖🎀</div>
     `;
 
         // Append to body directly
@@ -936,8 +950,8 @@ class HelloKittyGame {
                 celebration.remove();
                 this.playSFX('success');
                 this.showMemoryVault();
-            }, 500);
-        }, 2500);
+            }, 3000);
+        }, 5000);
     }
 
     handleNoClick() {
@@ -949,7 +963,7 @@ class HelloKittyGame {
         // Play different sounds based on click count
         if (this.villainClickCount < this.villainMessages.length) {
             this.playSFX('error');
-            this.playSFX('meow');
+            this.playSFX('purr');
         }
 
         // Update villain button text
@@ -1009,7 +1023,7 @@ class HelloKittyGame {
 
         // Play dramatic sound
         this.playSFX('error');
-        setTimeout(() => this.playSFX('meow'), 300);
+        setTimeout(() => this.playSFX('muhehehe'), 300);
 
         // Create system takeover effect - APPEND TO BODY DIRECTLY
         const takeover = document.createElement('div');
@@ -1050,7 +1064,7 @@ class HelloKittyGame {
             AHAHAHA! You thought you could say NO to a kitty?<br>
             Well guess what... YOU CAN'T! 😹
         </p>
-        <div style="font-size: 3rem; margin: 2rem 0; color: white;">⚡🐱⚡</div>
+        <div style="font-size: 3rem; margin: 2rem 0; color: white;">⚡😼⚡</div>
         <p style="font-size: 1.2rem; color: #ffcc00; font-weight: bold; line-height: 1.4;">
             The choice has been made for you!<br>
             YES is the ONLY option! 💖
@@ -1131,7 +1145,7 @@ class HelloKittyGame {
 
     createHeartExplosion() {
         const container = document.getElementById('proposal-effects');
-        const emojis = ['💖', '💕', '💗', '💓', '💘', '😻', '🐱', '🎀', '✨', '🌟'];
+        const emojis = ['💖', '💕', '💗', '💓', '💘', '😻', '😼', '🎀', '✨', '🌟'];
 
         for (let i = 0; i < 50; i++) {
             const heart = document.createElement('div');
@@ -1258,14 +1272,14 @@ class HelloKittyGame {
                 this.createSparkles(vaultContent);
                 setTimeout(() => {
                     this.showFinalScene();
-                }, 2000);
-            }, 1500);
+                }, 3000);
+            }, 4000);
         }
     }
 
     generateGalleryContent() {
         const kittyImages = [
-            { emoji: '🐱', color: '#ffafcc', desc: 'Hello Kitty being adorable' },
+            { emoji: '😼', color: '#ffafcc', desc: 'Hello Kitty being adorable' },
             { emoji: '🎀', color: '#ff6b8b', desc: 'Pink bow collection' },
             { emoji: '✨', color: '#ffcc00', desc: 'Magical sparkles' },
             { emoji: '🍬', color: '#cdb4db', desc: 'Sweet treats for you' },
@@ -1383,7 +1397,7 @@ class HelloKittyGame {
                     With all my love and whiskers,
                 </p>
                 <p style="font-family: var(--font-cute); font-size: 2rem; color: var(--color-kitty-red);">
-                    Your Secret Kitty Admirer 🐱💝
+                    Your Secret Kitty Admirer 😼💝
                 </p>
                 <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 1rem;">
                     <i class="fas fa-paw" style="color: var(--color-kitty-pink);"></i>
@@ -1406,7 +1420,7 @@ class HelloKittyGame {
             teasing: "a charming teaser with witty banter 😏",
             emotional: "an emotional soul with depth and feeling 🥺",
             fantasy: "a dreamer who sees magic everywhere ✨",
-            kitty: "a certified cat lover extraordinaire! 🐱👑"
+            kitty: "a certified cat lover extraordinaire! 😼👑"
         };
 
         const totalScore = Object.values(this.emotionalProfile).reduce((a, b) => a + b, 0);
@@ -1501,7 +1515,7 @@ class HelloKittyGame {
                         "This Valentine's, may you find someone who appreciates every meow-ment with you.<br>
                         Someone who sees the magic in your smile and the sparkle in your eyes.<br>
                         Until then, know that in this corner of the internet,<br>
-                        <strong>you made a kitty's heart very happy.</strong> 🐱💖"
+                        <strong>you made a kitty's heart very happy.</strong> 😼💖"
                     </p>
                 </div>
                 
@@ -1533,7 +1547,7 @@ class HelloKittyGame {
             ${this.generateFinalLetter()}
             <div class="signature">
                 <p>With all my love, cuddles, and purrs,</p>
-                <p class="signature-name">Your Secret Kitty Admirer 🐱💖</p>
+                <p class="signature-name">Your Secret Kitty Admirer 😼💖</p>
                 <div style="display: flex; justify-content: center; gap: 20px; margin-top: 1rem; font-size: 1.5rem;">
                     <i class="fas fa-paw" style="color: var(--color-kitty-pink);"></i>
                     <i class="fas fa-heart" style="color: var(--color-kitty-red);"></i>
@@ -1546,7 +1560,7 @@ class HelloKittyGame {
 
         this.switchScene('final-screen');
         this.playSFX('success');
-        this.playSFX('purr');
+        this.playSFX('meow');
 
         // Create celebration particles
         this.createCelebrationParticles();
@@ -1569,7 +1583,7 @@ class HelloKittyGame {
         const paragraphs = [
             `From the moment you clicked "start" on this little adventure, I knew there was something special about you, ${name}. The way you answered each question, with that unique ${dominantEmotion} energy... it's been lighting up this digital space like a constellation of fireflies. ✨`,
 
-            `Remember when you said "${randomAnswer}"? That's when I realized you weren't just playing a game - you were sharing pieces of your wonderful self, and each piece has been more delightful than the last. Like finding the perfect sunbeam for a nap. 🐱☀️`,
+            `Remember when you said "${randomAnswer}"? That's when I realized you weren't just playing a game - you were sharing pieces of your wonderful self, and each piece has been more delightful than the last. Like finding the perfect sunbeam for a nap. 😼☀️`,
 
             `This Valentine's Day, I don't just want to give you virtual flowers or digital chocolates (though you definitely deserve both, and maybe some cat treats too!). I want to give you moments that make your heart do that funny little flip, memories that linger like the scent of fresh cookies, and the absolute certainty that you are worth celebrating every single day. 🍪💖`,
 
@@ -1587,9 +1601,9 @@ class HelloKittyGame {
         const container = document.querySelector('.final-container');
         if (!container) return;
 
-        const emojis = ['🎉', '✨', '🌟', '💖', '🐱', '🎀', '🥳', '😻', '💫', '🧨'];
+        const emojis = ['🎉', '✨', '🌟', '💖', '😼', '🎀', '🥳', '😻', '💫', '🧨'];
 
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 100; i++) {
             const particle = document.createElement('div');
             particle.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
 
@@ -1597,7 +1611,7 @@ class HelloKittyGame {
                 position: absolute;
                 left: ${Math.random() * 100}%;
                 top: ${Math.random() * 100}%;
-                font-size: ${Math.random() * 30 + 20}px;
+                font-size: ${Math.random() * 2 + 10}px;
                 opacity: 0;
                 pointer-events: none;
                 z-index: 100;
@@ -1653,7 +1667,7 @@ class HelloKittyGame {
                     Here's a virtual cookie just for you! 😋
                 </p>
                 <p style="font-size: 1.2rem; color: var(--color-kitty-purple); margin-top: 1rem; font-style: italic;">
-                    *nom nom nom* Delicious! 🐱
+                    *nom nom nom* Delicious! 😼
                 </p>
             </div>
         `;
@@ -1770,12 +1784,12 @@ class HelloKittyGame {
         this.playSFX('click');
         this.playSFX('meow');
 
-        const shareText = `I just experienced the most adorable Hello Kitty Valentine's game! 😻💖 Try it and see if it makes you smile! 🐱✨`;
+        const shareText = `I just experienced the most adorable Hello Kitty Valentine's game! 😻💖 Try it and see if it makes you smile! 😼✨`;
         const shareUrl = window.location.href;
 
         if (navigator.share) {
             navigator.share({
-                title: 'Hello Kitty Valentine Adventure 🐱💖',
+                title: 'Hello Kitty Valentine Adventure 😼💖',
                 text: shareText,
                 url: shareUrl
             }).catch(err => {
@@ -1791,7 +1805,7 @@ class HelloKittyGame {
         const fullText = `${text}\n\n${url}`;
 
         // Create a more fun message
-        const successMessage = `Link copied to clipboard! 🐱📋\n\nShare this cuteness with someone who deserves a smile! 💖\n\nP.S. You're amazing! ✨`;
+        const successMessage = `Link copied to clipboard! 😼📋\n\nShare this cuteness with someone who deserves a smile! 💖\n\nP.S. You're amazing! ✨`;
 
         navigator.clipboard.writeText(fullText).then(() => {
             alert(successMessage);
@@ -1812,17 +1826,17 @@ class HelloKittyGame {
             loading: {
                 quotes: [
                     "Baking heart-shaped cookies... 🍪💖",
-                    "Training kittens to deliver love letters... 📮🐱",
+                    "Training kittens to deliver love letters... 📮😼",
                     "Polishing Hello Kitty's bow... 🎀✨",
                     "Warming up the purr engine... 🐾💨",
                     "Sprinkling magical kitty dust... ✨🐈",
                     "Untangling balls of yarn... 🧶😅",
-                    "Teaching cats to dance... 💃🐱🕺",
+                    "Teaching cats to dance... 💃😼🕺",
                     "Filling treat bags with love... 🍬💝",
                     "Testing the cuteness meter... 😻📊",
                     "Charging the hug batteries... 🔋🤗",
-                    "Organizing a cuddle puddle... 🐱🐱🐱",
-                    "Programming the meow-sic... 🎵🐱",
+                    "Organizing a cuddle puddle... 😼😼😼",
+                    "Programming the meow-sic... 🎵😼",
                     "Inflating heart balloons... 🎈❤️",
                     "Brewing friendship tea... ☕️🐾",
                     "Knitting cozy memories... 🧣💭",
@@ -1830,13 +1844,13 @@ class HelloKittyGame {
                     "Planting smile seeds... 🌱😊",
                     "Wrapping virtual hugs... 🎁🤗",
                     "Calibrating the giggle detector... 😄📡",
-                    "Finalizing the purr-fect experience... 🐱✅"
+                    "Finalizing the purr-fect experience... 😼✅"
                 ]
             },
             questions: [
                 {
                     question: "If I were a kitten knocking things off your table, you'd:",
-                    category: "Kitty Scenarios 🐱",
+                    category: "Kitty Scenarios 😼",
                     imageEmoji: "🐈",
                     flirtyQuote: "Asking for a friend who might want to cause cute chaos...",
                     options: [
@@ -1917,7 +1931,7 @@ class HelloKittyGame {
                     },
                     {
                         type: "kitty",
-                        title: "Ultimate Cat Lover 🐱👑",
+                        title: "Ultimate Cat Lover 😼👑",
                         description: "For those who speak fluent purr",
                         emoji: "👑"
                     }
@@ -1999,10 +2013,10 @@ document.addEventListener('DOMContentLoaded', () => {
         title.addEventListener('click', () => {
             titleClicks++;
             if (titleClicks >= 5) {
-                title.textContent = "🐱 SECRET KITTY MODE ACTIVATED! 😼";
+                title.textContent = "😼 SECRET KITTY MODE ACTIVATED! 😼";
                 title.style.animation = 'glow 0.5s infinite alternate';
                 setTimeout(() => {
-                    title.textContent = "🐱 Hello Kitty Valentine Adventure 💖";
+                    title.textContent = "😼 Hello Kitty Valentine Adventure 💖";
                     title.style.animation = '';
                 }, 2000);
                 titleClicks = 0;
